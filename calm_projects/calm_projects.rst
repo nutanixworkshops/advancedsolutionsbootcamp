@@ -61,7 +61,7 @@ Under **Network**, select the **Primary** and if available, the **Secondary** ne
 
 Click **Save**.
 
-.. figure:: images/enable2.png
+.. figure:: images/510projects2.png
 
 .. note::
 

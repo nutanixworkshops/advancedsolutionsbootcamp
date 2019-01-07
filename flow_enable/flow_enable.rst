@@ -1,8 +1,8 @@
-.. _flow_enable_and_lab_setup:
+.. _flow_enable:
 
---------------------------
-Flow: Enable and Lab Setup
---------------------------
+-------------
+Flow: Enable
+-------------
 
 Overview
 ++++++++
