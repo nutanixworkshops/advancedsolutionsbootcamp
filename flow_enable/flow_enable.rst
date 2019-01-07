@@ -51,7 +51,7 @@ To import a Calm Blueprint, ensure Calm is enabled (Please see the Enable Calm o
 
 Download the blueprint for this lab at the following link:
 
-:download:`abc_TaskManager.json <https://s3.amazonaws.com/technology-boot-camp/abc_TaskManager.json>`
+:download:`abc_TaskManager.json <abc_TaskManager.json>`
 
 From the Dashboard in Prism, Click the <icon here> Navigation menu on the top left then select **Services** > **Calm**.
 
