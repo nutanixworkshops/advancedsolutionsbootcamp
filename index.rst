@@ -33,6 +33,7 @@
 
   what_is_flow/what_is_flow
   flow_enable/flow_enable
+  flow_enable/flow_import_app_blueprint
   flow_secure_app/flow_secure_app
   flow_verify_app/flow_verify_app
   flow_isolate_environments/flow_isolate_environments
