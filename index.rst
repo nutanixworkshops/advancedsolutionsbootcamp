@@ -6,13 +6,15 @@
   :name: _prism_central
   :hidden:
 
-  monitoring_and_managing_env/monitoring_and_managing_env
-  lab_monitoring_env/lab_monitoring_env
+  what_is_prism_central/what_is_prism_central
+  prism_central_overview/prism_central_overview
+  prism_central_dashboards_reports/prism_central_dashboards_reports
+  prism_central_resource_planning/prism_central_resource_planning
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Calm Lab
-  :name: _optional_calm_lab
+  :caption: Calm Lab
+  :name: _calm_lab
   :hidden:
 
   what_is_calm/what_is_calm
@@ -25,8 +27,8 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Flow Lab
-  :name: _optional_flow_lab
+  :caption: Flow Lab
+  :name: _flow_lab
   :hidden:
 
   what_is_flow/what_is_flow

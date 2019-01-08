@@ -1,8 +1,8 @@
-.. _lab_prism_central_overview:
+.. _prism_central_overview:
 
----------------------------------
-Lab - Nutanix Prism Central Overview
----------------------------------
+-----------------------
+Prism Central: Overview
+-----------------------
 
 Overview
 ++++++++

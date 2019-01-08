@@ -1,4 +1,4 @@
-.. _what_is_prismcentral:
+.. _what_is_prism_central:
 
 ---------------------
 What Is Prism Central

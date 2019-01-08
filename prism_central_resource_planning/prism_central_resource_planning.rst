@@ -1,51 +1,18 @@
-.. _lab_monitoring_env:
+.. _prism_central_resource_planning:
 
-----------------
-Lab - Monitoring
-----------------
+--------------------------------
+Prism Central: Resource Planning
+--------------------------------
 
 Overview
 ++++++++
 
-Learn about Prism Central’s monitoring and resource planning features that help you stay on top of cluster utilization and more accurately predict cluster expansions.
+This lab will introduce Prism Central’s resource planning features that help you stay on top of cluster utilization and more accurately predict cluster expansions.
 
-Prism Central Reports
-+++++++++++++++++++++
+Prism Central Resource Planning
++++++++++++++++++++++++++++++++
 
-Prism Central allows you to generate historical reports about your cluster environment.
-
-Such reports can include resource consumption, abnormal behavior, and other valuable operational insights.
-
-In **Prism Central > Explore > Reports**.
-
-Lets run the **Cluster Efficiency Summary** report.
-
-Select **Cluster Efficiency Summary**, then click **Run** from the **Actions** drop-down menu.
-
-.. figure:: images/monitoring_01.png
-
-Next, fill out the following fields and click **Run**:
-
-- **Report instance Name** - Cluster Efficiency Summary - *initials*
-- **Time Period for Report** - Last 24 Hours
-
-Now lets run the **Environment Summary** report.
-
-Select **Environment Summary**, then click **Run** from the **Actions** drop-down menu.
-
-Next, fill out the following fields and click **Run**:
-
-- **Report instance Name** - Environment Summary - *initials*
-- **Time Period for Report** - Last 24 Hours
-
-Once the reports are complete, select each report, and do the following:
-
-Click **View Instances.** from the **Actions** drop-down menu.
-
-- To view the report in a separate tab, click the name of the report.
-- To download the report, select its check box, then click **Download** at the upper right of the screen.
-
-Review the contents of the reports you created in this exercise.
+Nutanix utilizes our X-Fit machine learning and data analytics as part of Prism Pro. We utilize that machine learning and data analytics to provide Cluster Runway and just in time forecasting (What If Planning).
 
 Capacity Runway
 ...............
@@ -112,19 +79,9 @@ Now lets experiment with changing the target and workloads and generating recomm
 
 Generate a PDF report to see detailed capacity planning information.
 
-Bonus Round: Create a Custom Report
-...................................
-
-To create a new custom report from scratch, click the plus sign beside **Actions**, then add the desired metrics from the pane on the left side.
-
-Once you have saved the custom report, you can run it just as you would run any other report.
-
-To set a report to run automatically, add a schedule to it.
-
 Takeaways
 +++++++++
 
-- The Prism Central report management feature provides you with an ability to configure and deliver the historical reports containing information about the infrastructure resources straight into your mailbox according to the schedules configured.
 - The Capacity Runway view in the Planning dashboard allows you to view summary resource runway information for the registered clusters and access detailed runway information about each cluster.
 - The Scenarios view in the Planning dashboard allows you to create "what if" scenarios to assess the future resource requirements for potential work loads that you specify.
 - You must have a Prism Pro license to use the resource planning tools.
