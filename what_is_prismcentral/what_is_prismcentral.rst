@@ -22,26 +22,32 @@ This global management experience offers a single place to monitor performance, 
 Prism Central
 +++++++++++++
 
-Prism Central Dashboards
-........................
+Prism Central Customizable Dashboards
+.....................................
 
 What is it?
 
-- Custom Dashboards
-- Widget Based
-- Full Drill-down
-- Exec Summary Reports
+- Live dashboards for at-a-glance view of the entire infrastructure
+- Build/customize from pre-defined widgets
+- Customize charts, alerts, performance metrics amongst others
 
 Benefits:
 
-- Important Summarization
+- Monitor everything from storage to apps from home screen
+- Reduce mean time to restore from failures
+- Different views for different employees
 
 .. figure:: images/what_is_prismcentral_04.png
 
-Network Visualization
-.....................
+Customize Dashboards with Widgets
+.................................
 
-.. figure:: images/what_is_prismcentral_05.png
+.. figure:: images/what_is_prismcentral_16.png
+
+Build A Performance Dashboard
+.............................
+
+.. figure:: images/what_is_prismcentral_17.png
 
 Prism Self-Service
 ..................
