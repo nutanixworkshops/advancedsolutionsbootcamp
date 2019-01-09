@@ -46,6 +46,7 @@
   :hidden:
 
   calm_enable/calm_enable
+  flow_assign_categories_in_calm/flow_assign_categories_in_calm
 
 .. toctree::
   :maxdepth: 2

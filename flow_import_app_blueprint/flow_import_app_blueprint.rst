@@ -109,3 +109,18 @@ Edit the VM Name field in each of the VMs to add your initials. Select VM Config
 abc-MYSQL-@@{calm_array_index}@@-@@{calm_time}@@
 
 .. figure:: images/calm_prefix_vm_name.png
+
+Launch a Service from the Calm Blueprint.
+-----------------------------------------
+
+Launch the application blueprint to initiate the creation of the VMs associated with the application. These VMs will be created with the appropriate network and category settings from the blueprint.
+
+Select **Save** to commit any changes.
+
+Click Launch and name the application **abc_TaskManager**, replacing abc with your initials.
+
+.. figure:: images/flow_secure_5_launch_bp.png
+
+Finally, Click Create.
+
+Move on to the next tasks while the application deploys.
