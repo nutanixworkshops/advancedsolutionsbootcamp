@@ -18,8 +18,8 @@
   :hidden:
 
   what_is_calm/what_is_calm
+  calm_enable/calm_enable
   calm_projects/calm_projects
-  calm_sshkey_creation/calm_sshkey_creation
   calm_mysql_blueprint/calm_mysql_blueprint
   calm_3twa_blueprint/calm_3twa_blueprint
   calm_windows_blueprint/calm_windows_blueprint
@@ -46,6 +46,7 @@
 
   calm_enable/calm_enable
   flow_assign_categories_in_calm/flow_assign_categories_in_calm
+  calm_sshkey_creation/calm_sshkey_creation
 
 .. toctree::
   :maxdepth: 2

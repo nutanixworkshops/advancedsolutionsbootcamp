@@ -11,9 +11,9 @@ Overview
 
   Review :ref:`calm_basics` before proceeding with the lab to familiarize yourself with the UI and common terminology used in Nutanix Calm.
 
-  Estimated time to complete: **170 MINUTES**
+  Estimated time to complete: **15 MINUTES**
 
-In this exercise you will configure a Project to contain your Blueprints and Applications created throughout the Workshop.
+In this exercise you will configure a Project to contain your Blueprints and Applications created throughout the Bootcamp.
 
 Creating A Project
 ++++++++++++++++++

@@ -11,18 +11,20 @@ Overview
 
   Review :ref:`calm_basics` before proceeding with the lab to familiarize yourself with the UI and common terminology used in Nutanix Calm.
 
-  Estimated time to complete: **170 MINUTES**
+  Estimated time to complete: **10 MINUTES**
 
-In this exercise you will enable Nutanix Calm and configure a Project to contain your Blueprints and Applications created throughout the Workshop.
+In this exercise you will enable Nutanix Calm.
 
 Enabling App Management
 +++++++++++++++++++++++
 
-In this exercise you will enable Nutanix Calm and configure a Project to contain your Blueprints and Applications created throughout the Workshop.
+Calm is built into Prism Central and requires no additional appliances or consoles to manage. Before you can begin managing apps in your environment with Calm, the service must be enabled.
 
-Open \https://*<Prism-Central-IP>*:9440/ in a browser and log in.
+.. note::
 
-From the navigation bar, select **Calm** (if you're running PC <5.8.1, then select **Apps**).
+  Calm can only be enabled once per Prism Central instance. If **Enable app management** displays a green check mark next to it, that means Calm has already been enabled for the Prism Central instance being used. Proceed to :ref:`calm_projects`.
+
+In **Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Enable app management**.
 
 Click **Enable**.
 

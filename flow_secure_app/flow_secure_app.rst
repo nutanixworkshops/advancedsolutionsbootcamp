@@ -304,6 +304,7 @@ Verify that the Windows Client VM can still access the Task Manager application 
 Takeaways
 +++++++++
 
+- Microsegmentation offers additional protection against malicious threats that originate from within the data center and spread laterally, from one machine to another.
 - Categories created in Prism Central are available inside Calm blueprints.
 - Security policies leverage the text based categories in Prism Central.
 - Flow can restrict traffic on certain ports and protocols for VMs running on AHV.

@@ -69,3 +69,6 @@ Takeaways
 +++++++++
 
 - Calm Blueprints can deploy applications that are automatically secured with Flow.
+
+.. |blueprints| image:: ../images/blueprints.png
+.. |applications| image:: ../images/blueprints.png

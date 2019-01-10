@@ -110,5 +110,5 @@ You can monitor the status of your application deployment by clicking |applicati
 
 Provisioning the complete application will take approximately 15 minutes. Proceed to the next section of the lab while the application is provisioning.
 
-.. |blueprints| image:: images/blueprints.png
-.. |applications| image:: images/blueprints.png
+.. |blueprints| image:: ../images/blueprints.png
+.. |applications| image:: ../images/blueprints.png
