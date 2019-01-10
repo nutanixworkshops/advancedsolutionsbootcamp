@@ -333,8 +333,6 @@ Once the application changes into a **RUNNING** state, navigate to the **Service
 
 .. figure:: images/5103twa2.png
 
-Now, back within Calm, navigate to the **Manage** tab, and click the play button next to the **Scale Out** task, and click **Run** to Scale out the Web Server.  Monitor the Scale Out action on the **Audit** tab.
-
 Takeaways
 +++++++++
 
