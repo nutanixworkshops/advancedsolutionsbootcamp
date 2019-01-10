@@ -88,8 +88,8 @@ Services
 In the Application Overview pane on the left, click the **+** next to **Service** twice, to create two Services.  Configure the following **Service and VM** fields for the two services with these values:
 
 +------------------------------+-------------------------+-------------------------+
-| Service Name                 | MSSQL                   | MSIIS                   |
-+==============================+=========================+=========================+
+| **Service Name**             | **MSSQL**               | **MSIIS**               |
++------------------------------+-------------------------+-------------------------+
 | **Name**                     | MSSQL2014               | MSIIS8                  |
 +------------------------------+-------------------------+-------------------------+
 | **Cloud**                    | Nutanix                 | Nutanix                 |
