@@ -16,59 +16,56 @@ In this task we will place a VM into quarantine and observe the behavior of the 
 Quarantine a VM and Explore the Quarantine Policy
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-Confirm Task Manager App Availability
-.......................................................
+In this task we will place a VM into quarantine and observe the behavior of the VM. We will also inspect the configurable options inside the quarantine policy.
 
-Log on to the Prism Central environment and navigate to <icon>hamburger menu **Services > Calm**.
+Return to the *Initials*\ **-WinClient-0** console.
 
-Navigate to <icon>hamburger menu **Virtual Infrastructure > VMs** and type your initials into the search bar. Click **View all X VMs**, select your Windows client VM, and click **Actions > Launch Console**.
+Open a **Command Prompt** and run ``ping -t HAPROXY-VM-IP`` to verify connectivity between the client and load balancer.
 
-.. figure:: images/flow_q_1_console.png
+.. note::
 
-Find the IP of the newly deployed Load Balancer VM in the VM list.
+  If the ping is unsuccessful you may need to update your Inbound Rule for **Environment:Dev** to **AppTier:TMLB-**\ *Initials* to include **Any** as the **Type** and **Code** for **ICMP** traffic as shown below. Apply the updated **AppTaskMan-**\ *Initials* policy and the ping should resume.
 
-From the Windows Client VM open a web browser and enter the IP address of the load balancer. Confirm that the Task Manager web application loads and that tasks can be added or deleted from the web interface.
+  .. figure:: images/41.png
 
-Click the Start menu, type cmd.exe, and type ping <load balancer IP>.
+In **Prism Central > Virtual Infrastructure > VMs**, select your *Initials*\ **-HAPROXY-0...** VM.
 
-Once connectivity is confirmed, enter **ping -t <load balancer IP>** as an ongoing connectivity test from the Windows client VM to the database.
+Click **Actions > Quarantine VMs**
 
-Quarantine a VM and Edit The Quarantine Policy
-..............................................
-
-Quarantine the load balancer HAProxy VM in your Task Manager application by navigating to <icon>hamburger menu **Virtual Infrastructure > VMs**.
-
-Select **abc-HAProxy-X-XXXX-XXXX > Actions > Quarantine VMs**. 
-
-.. figure:: images/flow_q_2_action_menu.png
+.. figure:: images/42.png
 
 Select **Forensic** and click **Quarantine**.
 
-.. figure:: images/flow_q_3_forensic_select.png
+What happens with the continuous ping between your client and the load balancer? Can you access the Task Manager application web page from the client VM?
 
-What happens with the continuous ping between your Windows client and the load balancer? Can you access the Task Manager application web page from the Windows client?
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > Quarantine** to view all Quarantined VMs.
 
-Navigate to <icon>hamburger menu **Policies > Security Policies > Quarantine**.
+Click **Update** to edit the Quarantine policy.
 
-Select **Update** in the top right corner then select **+ Add Source** to the Quarantine policy.
+To illustrate the capabilities of this special Flow policy, you will add your client VM as a "forensic tool." In other environments, VMs allowed inbound access to quarantined VMs could be used to host forensic tools such as... <?>
 
-Add a source by **Subnet/IP** with the IP address of the Windows client VM, and a netmask of **/32**. 
+Under **Inbound**, click **+ Add Source**.
 
-.. figure:: images/flow_q_4_add_forensic_src.png
+Fill out the following fields:
 
-What targets can this source be connected to?
+- **Add source by:** - Select **Subnet/IP**
+- Specify *Your WinClient VM IP*\ /32
 
-What is the difference between the Forensic and Strict quarantine mode?
+To what targets can this source be connected? What is the difference between the Forensic and Strict quarantine mode?
 
-Click on the plus sign ( + ) near **Forensic** category and allow any protocol on any port to the Forensic quarantine category.
+Note that adding a VM to the **Strict** Quarantine policy disables all inbound and outbound communication to a VM. The **Strict** policy would apply to an VMs whose presence on the network poses a threat to the environment.
 
-.. figure:: images/flow_q_5_add_rule.png
+Click the :fa:`plus-circle` icon to the right of **Quarantine: Forensic** to create an Inbound Rule.
 
-Select **Next > Apply Now** to save the policy.
+Click **Save** to allow any protocol on any port between the client VM and the **Quarantine: Forensic** category.
+
+.. figure:: images/43.png
+
+Click **Next > Apply Now** to save and apply the updated policy.
 
 What happens to the pings to the load balancer after the source is added? Can you access the Task Manager web application?
 
-Unquarantine the load balancer VM by navigating to **abc-HAProxy-X-XXXX-XXXX > Actions > Unquarantine VMs**.
+You can remove the load balancer VM from the **Quarantine: Forensic** category by selecting the VM in Prism Central and clicking **Actions > Unquarantine VMs**.
 
 Takeaways
 +++++++++

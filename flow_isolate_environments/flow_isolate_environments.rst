@@ -13,79 +13,83 @@ Overview
 
 In this exercise you will create a new environment category and assign this to the Task Manager application. Then you will create and implement an isolation security policy that uses the newly created category in order to restrict unauthorized access.
 
-Isolate Environments with Flow
-++++++++++++++++++++++++++++++
+Isolating Environments
+++++++++++++++++++++++
 
+<When would someone want to isolate environments versus locking down applications?>
 
-Create and Assign Categories
+In this exercise you will create a new environment category and assign this to the Task Manager application. Then you will create and implement an isolation security policy that uses the newly created category in order to restrict unauthorized access.
+
+Creating and Assigning Categories
+.................................
+
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Categories**.
+
+Select the checkbox for **Environment** and click **Actions > Update**.
+
+Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
+
+Specify **Prod-**\ *Initials* as the value name.
+
+.. figure:: images/37.png
+
+Click **Save**.
+
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+Click **Filters** and search for *Initials-* to display your virtual machines.
+
+.. note::
+
+  If you previously created a Label for your application VMs you can also search for that label. Alternatively you can search for the **AppType:TaskMan-**\ *Initials* category from the Filters pane.
+
+  .. figure:: images/38.png
+
+Using the checkboxes, select the 4 VMs associated with the application (HAProxy, MYSQL, WebServer-0, WebServer-1) and select **Actions > Manage Categories**.
+
+Specify **Environment:Prod-**\ *Initials* in the search bar and click **Save** icon to bulk assign the category to all 4 VMs.
+
+.. figure:: images/39.png
+
+Creating an Isolation Policy
 ............................
 
-Update **Environment** with a new category value **Prod-abc**
--------------------------------------------------------------
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies**.
 
-Log on to the Prism Central environment and go to the navigation menu > **Virtual Infrastructure > Categories**.
-
-Click the check box beside **Environment**. Click **Actions > Update**.
-
-Scroll down and click the plus sign beside the last entry.
-
-Enter **Prod-abc**, replacing abc with your initials and click **Save**.
-
-.. figure:: images/flow_iso_1_create_prod.png
-
-
-Add Category to Task Manager VMs
---------------------------------
-Select **Virtual Infrastructure > VMs** from the navigation Menu and search for your initials. Click **View All X VMs**
-
-Select the load balancer, web, and database VMs that are part of the Task Manager application and click **Actions > Manage Categories**.
-
-Search for and select the newly created **Prod-abc** category. Click **Save** to apply this category to all VMs in the application.
-
-.. figure:: images/flow_iso_2_assign_prod.png
-
-Create a New Security Policy
-............................
-
-Navigate to <icon>hamburger menu **Policies > Security Policies** within Prism Central.
-
-Click **Create Security Policy** > Select **Isolate Environments**.
+Click **Create Security Policy > Isolate Environments**.
 
 Fill out the following fields:
 
-- **Name** - isolate-dev-prod-abc, replacing abc with your initials.
-- **Purpose** - Isolate dev from prod-abc.
-- **Isolate This Category** - Environment: Development.
-- **From This Category** - Environment: Prod-abc.
+- **Name** - Isolate-dev-prod-\ *Initials*
+- **Purpose** - Isolate dev from prod-\ *Initials*
+- **Isolate This Category** - Environment:Dev
+- **From This Category** - Environment:Prod-\ *Initials*
+- Do **NOT** select **Apply this isolation only within a subset of the datacenter**. This option provides additional granularity by only applying to VMs assigned a third, mutual category.
 
-Do NOT select the check box for **Apply the isolation only within a subset of the data center**.
+.. figure:: images/40.png
 
-Click **Apply Now** to save the policy in Apply mode.
+Click **Apply Now** to save the policy and begin enforcement immediately.
 
-.. figure:: images/flow_iso_3_create_iso_policy.png
+Return to the *Initials*\ **-WinClient-0** console.
 
+Is the Task Manager application accessible? Why not?
 
-Confirm communication is NOT possible after applying the Isolation Policy
--------------------------------------------------------------------------
+Using these simple policies it is possible to... <?>
 
-Open the VM console of the Windows client VM and navigate to the load balancer IP address using a web browser.
+Deleting a Policy
+.................
 
-Is the Task Manager Application accessible?
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies**.
+
+Select **Isolate-dev-prod-**\ *Initials* and click **Actions > Delete**.
+
+Type **DELETE** in the confirmation dialogue and click **OK** to disable the policy.
 
 .. note::
-  The application should NOT be reachable because these two VMs now belong to the Environment: Development and Envionrment: Prod-abc categories and the policy isolate-dev-prod-abc, which was created earlier, isolates these two types of VMs.
 
+  To disable the policy you can choose to enter **Monitor** mode, rather than deleting the policy completely.
 
-Delete the Isolation Policy
----------------------------
-Navigate to <icon>hamburger menu **Policies > Security Policies** and select **isolate-dev-prod-abc**.
-
-Select **Actions > Delete** and type **DELETE** to confirm. Click **OK** to delete the policy.
-
-.. figure:: images/flow_iso_4_delete.png
-
-Confirm that the Task Manager application is now reachable from the Windows client VM.
-
+Return to the *Initials*\ **-WinClient-0** console and verify the Task Manager application is accessible again from the browser.
 
 Takeaways
 +++++++++

@@ -16,30 +16,21 @@ In this exercise you will enable Nutanix Flow and edit a blueprint within Calm t
 Enabling Flow
 ++++++++++++++++++++++++++
 
-Open https://<Prism-Central-IP>:9440/ in the Chrome browser and log in.
+Flow is built into Prism Central and requires no additional appliances or consoles to manage. Before you can begin securing your environment with Flow, the service must be enabled.
 
 .. note::
 
-  Do not use Firefox for the Flow policy steps in the following exercises.
+  Flow can only be enabled once per Prism Central instance. If **Flow** displays a green check mark next to it, that means Flow has already been enabled for the Prism Central instance being used. Proceed to `Securing An Application`_.
 
-From the navigation bar, click the question mark at the top right corner and expand the **New in Prism Central** section of the menu.
+In **Prism Central**, click the **?** drop down menu and select **Flow**.
 
-Click **Flow**.
+.. figure:: images/10.png
 
-Select the **Enable Flow** check box within the **Enable Flow** dialog box.
+Note that enabling Flow will require an additional 1GB of memory for each Prism Central VM, but there is no action required by the user as this occurs automatically.
 
+Select **Enable Flow** and click **Enable**.
 
-.. figure:: images/enable_flow.png
-
-
-.. note::
-
-  Flow can only be enabled once per Prism Central instance. If **Flow** displays a green check mark next to it, that means Flow has already been enabled for the Prism Central instance being used.
-
-Click **Enable**
-
-
-.. figure:: images/enable.png
+.. figure:: images/11.png
 
 Takeaways
 +++++++++
