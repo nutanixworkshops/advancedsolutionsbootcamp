@@ -9,6 +9,7 @@ Overview
 
 This lab will walk through creating a blueprint which models a tiered Windows Application, which uses MSSQL for the backend, and MSIIS and Web PI for the frontend.  Launching the blueprint will result in a fully function bug tracking application called BugNET.  This lab does assume familiarity with Nutanix Calm.
 
+
 Creating the Blueprint
 ......................
 
@@ -16,13 +17,16 @@ From within Nutanix Calm, navigate to the **Blueprint** section, click **+ Creat
 
 .. figure:: images/create_blueprint.png
 
+
 In the pop-up, fill in the following three fields, and click **Proceed**:
 
 - **Name** - WindowsTieredApp<Initials>
 - **Description** - \* \[BugNET\]\(http://@@{MSIIS.address}@@/bugnet\)
 - **Project** - Calm
 
+
 .. figure:: images/name_blueprint.png
+
 
 Credentials, Configuration, and Variables
 .........................................
@@ -39,7 +43,9 @@ Along the top of the blueprint, click on **Credentials**, and then click the blu
 | **Password**        | nutanix/4u          | Str0ngSQL/4u$       |
 +---------------------+---------------------+---------------------+
 
+
 .. figure:: images/credentials.png
+
 
 Click **Back**, then select the **Configuration** link at the top, click the blue **+** next to the **Downloadable Image Configuration**, and fill in the following fields:
 
@@ -54,7 +60,9 @@ Click **Back**, then select the **Configuration** link at the top, click the blu
 - **Checksum Algorithm** - Leave blank
 - **Checksum Value** - Leave blank
 
+
 .. figure:: images/downloadable_image_config.png
+
 
 Click **Back**, and fill in the following variables under the Default Application Profile on the right pane:
 
@@ -70,7 +78,9 @@ Click **Back**, and fill in the following variables under the Default Applicatio
 
 .. figure:: images/variables.png
 
+
 Click **Save**, and ensure no errors or warnings appear.
+
 
 Services
 ........
@@ -128,6 +138,8 @@ In the Application Overview pane on the left, click the **+** next to **Service*
 +------------------------------+-------------------------+-------------------------+
 | **Size (GiB)**               | 100                     | 100                     |
 +------------------------------+-------------------------+-------------------------+
+| **VGPUs**                    | None                    | None                    |
++------------------------------+-------------------------+-------------------------+
 | **Categories**               | None                    | None                    |
 +------------------------------+-------------------------+-------------------------+
 | **Network Adapters**         | 1                       | 1                       |
@@ -144,8 +156,9 @@ In the Application Overview pane on the left, click the **+** next to **Service*
 +------------------------------+-------------------------+-------------------------+
 | **Connection Port**          | 5985                    | 5985                    |
 +------------------------------+-------------------------+-------------------------+
-| **Delay (in seconds)**       | 90                      | 90                      |
+| **Delay (in seconds)**       | **90**                  | **90**                  |
 +------------------------------+-------------------------+-------------------------+
+
 
 **Sysprep Script**:
 
@@ -227,9 +240,11 @@ In the Application Overview pane on the left, click the **+** next to **Service*
       </settings>
    </unattend>
 
+
 In the blueprint canvas, select the **MSIIS** service, then click the small **Create Dependency** icon, and then select the **MSSQL** service.
 
 .. figure:: images/services.png
+
 
 Package Install Scripts
 .......................
@@ -240,7 +255,11 @@ For **each** of the following 7 scripts (3 for MSSSQL and 4 for MSIIS), the **Ty
 - **Script Type** - Powershell
 - **Credential** - WIN_VM_CRED
 
-Select the **MSSQL** service, then select the **Package** header, and then click the **Configure install** button.  In the blueprint canvas, click the **+ Task** button that appears, once for each script (so 3 for MSSQL).
+
+Select the **MSSQL** service, then select the **Package** header, and name the package **MSSQLPackage**.
+
+Then click the **Configure install** button.  In the blueprint canvas, click the **+ Task** button that appears, once for each script (3 total for MSSQL).
+
 
 **MSSQL - Task 1 Name**: Initialize Disk
 
@@ -248,6 +267,7 @@ Select the **MSSQL** service, then select the **Package** header, and then click
 
    Get-Disk -Number 1 | Initialize-Disk -ErrorAction SilentlyContinue
    New-Partition -DiskNumber 1 -UseMaximumSize -AssignDriveLetter -ErrorAction SilentlyContinue | Format-Volume -Confirm:$false
+
 
 **MSSQL - Task 2 Name**: InstallMSSQL
 
@@ -281,6 +301,7 @@ Select the **MSSQL** service, then select the **Package** header, and then click
    exit 1
    }
 
+
 **MSSQL - Task 3 Name**: FirewallRules
 
 .. code-block:: powershell
@@ -292,11 +313,16 @@ Select the **MSSQL** service, then select the **Package** header, and then click
    New-NetFirewallRule -DisplayName "SQL Debugger/RPC" -Direction Inbound -Protocol TCP -LocalPort 135 -Action allow
    New-NetFirewallRule -DisplayName "SQL Browser" -Direction Inbound -Protocol TCP -LocalPort 2382 -Action allow
 
+
 Once complete, your MSSQL service should look like this:
 
 .. figure:: images/mssql_package_install.png
 
-Now select the **MSIIS** service, then the **Package** header, then **Configure install**.  In the blueprint canvas, click the **+ Task** button that appears, once for each script (so 4 for MSIIS).
+
+Now select the **MSIIS** service, then the **Package** header, and name the package **MSIISPackage**.
+
+Then click the **Configure install** button.  In the blueprint canvas, click the **+ Task** button that appears, once for each script (so 4 for MSIIS).
+
 
 **MSIIS - Task 1 Name**: InitializeDisk
 
@@ -304,6 +330,7 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
 
    Get-Disk -Number 1 | Initialize-Disk -ErrorAction SilentlyContinue
    New-Partition -DiskNumber 1 -UseMaximumSize -AssignDriveLetter -ErrorAction SilentlyContinue | Format-Volume -Confirm:$false
+
 
 **MSIIS - Task 2 Name**: InstallWebPI
 
@@ -314,6 +341,7 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
    Invoke-WebRequest 'http://download.microsoft.com/download/C/F/F/CFF3A0B8-99D4-41A2-AE1A-496C08BEB904/WebPlatformInstaller_amd64_en-US.msi' -OutFile c:/msi/WebPlatformInstaller_amd64_en-US.msi
    Start-Process 'c:/msi/WebPlatformInstaller_amd64_en-US.msi' '/qn' -PassThru | Wait-Process
    cd 'C:/Program Files/Microsoft/Web Platform Installer'; .\WebpiCmd.exe /Install /Products:'UrlRewrite2,ARRv3_0' /AcceptEULA /Log:c:/msi/WebpiCmd.log
+
 
 **MSIIS - Task 3 Name**: InstallNetFeatures
 
@@ -327,6 +355,7 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
    # Install Features
    Install-WindowsFeature -Name NET-Framework-Core
    Install-WindowsFeature -Name NET-WCF-Services45 -IncludeAllSubFeature
+
 
 **MSIIS - Task 4 Name**: InstallBugNetApp
 
@@ -347,11 +376,42 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
    WebpiCmd-x64.exe /Install /UseRemoteDatabase /Application:BugNET@BugNET0.app /AcceptEula
 
 
+Once complete, your MSIIS service should look like this:
+
+.. figure:: images/msiis_package_install.png
 
 
+Click **Save**, and ensure no errors or warnings appear.
 
 
+Launching the Blueprint
+.......................
+
+In the upper right corner, click the **Launch** button.  On the launch page, name your application **BugNET_<Initials>**, and then hit **Create**.  You'll be taken to the application overview page.
+
+.. figure:: images/application_overview.png
 
 
+Switch to the **Audit** page, and monitor the deployment.  In total, it should take about 15 to 20 minutes to deploy.
+
+.. figure:: images/application_audit.png
+
+
+Viewing the Application
+.......................
+
+Once the Create action complete, and the application is in a **Running** state, open the **BugNET** link in a new tab.
+
+.. figure:: images/bugnet_link.png
+
+
+You'll be presented with an **Installation Status Report** page.  Wait for it to report **Installation Complete**, and then click the link at the bottom to access the application.
+
+.. figure:: images/bugnet_setup.png
+
+
+Play around with your fully functional bug tracking application, powered by Microsoft SQL and IIS.
+
+.. figure:: images/bugnet_app.png
 
 
