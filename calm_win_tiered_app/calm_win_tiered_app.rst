@@ -52,7 +52,7 @@ Click **Back**, then select the **Configuration** link at the top, click the blu
 - **Product Name** - MSSQL
 - **Product Version** - 2014
 - **Checksum Algorithm** - Leave blank
-- **Checksum Value** - Leave blanks
+- **Checksum Value** - Leave blank
 
 .. figure:: images/downloadable_image_config.png
 
@@ -78,8 +78,8 @@ Services
 In the Application Overview pane on the left, click the **+** next to **Service** twice, to create two Services.  Configure the following **Service and VM** fields for the two services with these values:
 
 +------------------------------+-------------------------+-------------------------+
-| **Service Name**             | MSSQL                   | MSIIS                   |
-+------------------------------+-------------------------+-------------------------+
+| Service Name                 | MSSQL                   | MSIIS                   |
++==============================+=========================+=========================+
 | **Name**                     | MSSQL2014               | MSIIS8                  |
 +------------------------------+-------------------------+-------------------------+
 | **Cloud**                    | Nutanix                 | Nutanix                 |
@@ -88,7 +88,7 @@ In the Application Overview pane on the left, click the **+** next to **Service*
 +------------------------------+-------------------------+-------------------------+
 | **VM Name**                  | MSSQL-@@{calm_unique}@@ | MSIIS-@@{calm_unique}@@ |
 +------------------------------+-------------------------+-------------------------+
-| **Number of Images**         | 2                       | 2                       |
+| **Number of Images**         | 2                       | 1                       |
 +------------------------------+-------------------------+-------------------------+
 | **Image 1**                  | Windows2012R2           | Windows2012R2           |
 +------------------------------+-------------------------+-------------------------+
@@ -150,6 +150,7 @@ In the Application Overview pane on the left, click the **+** next to **Service*
 **Sysprep Script**:
 
 .. code-block:: XML
+
    <?xml version="1.0" encoding="UTF-8"?>
    <unattend xmlns="urn:schemas-microsoft-com:unattend">
       <settings pass="specialize">
@@ -244,12 +245,14 @@ Select the **MSSQL** service, then select the **Package** header, and then click
 **MSSQL - Task 1 Name**: Initialize Disk
 
 .. code-block:: powershell
+
    Get-Disk -Number 1 | Initialize-Disk -ErrorAction SilentlyContinue
    New-Partition -DiskNumber 1 -UseMaximumSize -AssignDriveLetter -ErrorAction SilentlyContinue | Format-Volume -Confirm:$false
 
 **MSSQL - Task 2 Name**: InstallMSSQL
 
 .. code-block:: powershell
+
    $DriveLetter = $(Get-Partition -DiskNumber 1 -PartitionNumber 2 | select DriveLetter -ExpandProperty DriveLetter)
    $edition = "Standard"
    $HOSTNAME=$(hostname)
@@ -281,6 +284,7 @@ Select the **MSSQL** service, then select the **Package** header, and then click
 **MSSQL - Task 3 Name**: FirewallRules
 
 .. code-block:: powershell
+
    New-NetFirewallRule -DisplayName "SQL Server" -Direction Inbound -Protocol TCP -LocalPort 1433 -Action allow
    New-NetFirewallRule -DisplayName "SQL Admin Connection" -Direction Inbound -Protocol TCP -LocalPort 1434 -Action allow
    New-NetFirewallRule -DisplayName "SQL Database Management" -Direction Inbound -Protocol UDP -LocalPort 1434 -Action allow
@@ -297,12 +301,14 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
 **MSIIS - Task 1 Name**: InitializeDisk
 
 .. code-block:: powershell
+
    Get-Disk -Number 1 | Initialize-Disk -ErrorAction SilentlyContinue
    New-Partition -DiskNumber 1 -UseMaximumSize -AssignDriveLetter -ErrorAction SilentlyContinue | Format-Volume -Confirm:$false
 
 **MSIIS - Task 2 Name**: InstallWebPI
 
 .. code-block:: powershell
+   
    # Install WPI
    New-Item c:/msi -Type Directory
    Invoke-WebRequest 'http://download.microsoft.com/download/C/F/F/CFF3A0B8-99D4-41A2-AE1A-496C08BEB904/WebPlatformInstaller_amd64_en-US.msi' -OutFile c:/msi/WebPlatformInstaller_amd64_en-US.msi
@@ -312,6 +318,7 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
 **MSIIS - Task 3 Name**: InstallNetFeatures
 
 .. code-block:: powershell
+   
    # Enable Repair via Windows Update
    $servicing = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Servicing"
    New-Item -Path $servicing -Force
@@ -324,6 +331,7 @@ Now select the **MSIIS** service, then the **Package** header, then **Configure 
 **MSIIS - Task 4 Name**: InstallBugNetApp
 
 .. code-block:: powershell
+   
    # Create the installation configuration file
    $configFile = "AppPath[@]Default Web Site/bugnet
    DbServer[@]@@{MSSQL.address}@@
