@@ -7,7 +7,7 @@ Calm: 3TWA Day 2 Operations
 Overview
 ++++++++
 
-Thus far we've seen how Calm can model complex applicaions in an easy to consume blueprint, and orchestrate their deployment.  However, Calm can manage applications throughout their *entire* lifecycle, not just creation.  In this lab, we'll create several custom actions which cover typical day 2 applicaion operations.
+Thus far we've seen how Calm can model complex applicaions in an easy to consume blueprint, and orchestrate their deployment.  However, Calm can manage applications throughout their *entire* lifecycle, not just creation.  In this lab, we'll create several custom actions which cover typical day 2 application operations.
 
 
 Scale Out
