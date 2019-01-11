@@ -106,7 +106,7 @@ Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the
 Upgrades
 ........
 
-Again, let's imagine we're the administrator of this web application.  Your company has a mandate to keep all applications' code up to date, to help prevent security vulnerabilities.  Your company also has a strict change control process, meaning you can only update your application during the weekend.  You're tired of doing a straightforward, yet time consuming, upgrade procedure one Saturday of every month.  Let's get your Saturday back by modeling the application upgrade with Nutanix Calm.
+Again, let's imagine we're the administrator of this web application.  Your company has a mandate to keep all application code up to date, to help minimize security vulnerabilities.  Your company also has a strict change control process, meaning you can only update your application during the weekend.  You're tired of doing a straightforward, yet time consuming, upgrade procedure one Saturday of every month.  Let's get your Saturday back by modeling the application upgrade with Nutanix Calm.
 
 In the **Application Overview > Application Profile** section, expand the **Default** Application Profile.  Then, select :fa:`plus-circle` next to the **Actions** section.  On the **Configuration Panel** to the right, rename the new Action to be **Upgrade**.
 
@@ -129,6 +129,7 @@ The first thing we're going to need to do is to stop the respective processes on
 **StopMySQL Script:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
@@ -137,6 +138,7 @@ The first thing we're going to need to do is to stop the respective processes on
 **StopWebServer Script:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
@@ -146,6 +148,7 @@ The first thing we're going to need to do is to stop the respective processes on
 **StopHAProxy Script:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
@@ -178,6 +181,7 @@ Now that our critical services are stopped, we'll want to perform our updates.  
 **Script for all 3 Upgrade Tasks:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
@@ -210,6 +214,7 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 **StartMySQL Script:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
@@ -218,6 +223,7 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 **StartWebServer Script:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
@@ -227,6 +233,7 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 **StartHAProxy Script:**
 
 .. code-block:: bash
+
    #!/bin/bash
    set -ex
    
