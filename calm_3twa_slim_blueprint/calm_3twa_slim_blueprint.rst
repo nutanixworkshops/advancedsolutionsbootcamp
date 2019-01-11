@@ -324,100 +324,6 @@ In the **Workspace**, select the **HAProxy** Service and click the **Create Depe
 
 Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
 
-Scale Out
-.........
-
-Imagine you're the administrator of the Task Manager Application that we've been building, and you're currently unsure of the amount of demand for this application by your end users.  Or imagine you expect the demand to ebb and flow due to the time of the year.  How can we easily scale to meet this changing demand?
-
-If you recall in a previous step, we set the minimum number of **WebServer** replicas to 2, and our maximum to 4.  In current versions of Calm, the minimum number is always the starting point.  In the event our default 2 replicas of our **WebServer** web server is not enough to handle the load of your end users, we can perform a **Scale Out** Action.
-
-In the **Application Overview > Application Profile** section, expand the **Default** Application Profile.  Then, select :fa:`plus-circle` next to the **Actions** section.  On the **Configuration Panel** to the right, rename the new Action to be **Scale Out**.
-
-.. figure:: images/510scaleout1.png
-
-In the box **below** the **WebServer** service tile, click the **+ Task** button to add a scaling task, and fill out the following fields:
-
-- **Task Name** - web_scale_out
-- **Scaling Type** - Scale Out
-- **Scaling Count** - 1
-
-.. figure:: images/510scaleout2.png
-
-When a user later runs the **Scale Out** task, a new **WebServer** VM will get created, and the **Package Install** tasks for that service will be executed.  However, we do need to modify the **HAProxy** configuration in order to start taking advantage of this new web server.
-
-**Within** the **HAProxy** service tile, click the **+ Task** button, then fill out the following fields:
-
-- **Task Name** - add_webserver
-- **Type** - Execute
-- **Script Type** - Shell
-- **Credential** - CENTOS
-
-Copy and paste the following script into the **Script** field:
-
-.. code-block:: bash
-
-  #!/bin/bash
-  set -ex
-
-  host=$(echo "@@{WebServer.address}@@" | awk -F "," '{print $NF}')
-  port=80
-  echo " server host-${host} ${host}:${port} weight 1 maxconn 100 check" | sudo tee -a /etc/haproxy/haproxy.cfg
-
-  sudo systemctl daemon-reload
-  sudo systemctl restart haproxy
-
-That script will grab the last address in the WebServer address array, and add it to the haproxy.cfg file.  However, we want to be sure that this doesn't happen until **after** the new WebServer is fully up, otherwise the HAProxy server may send requests to a non-functioning WebServer.
-
-To solve this issue, on the **Workspace**, click on the **web_scale_out** task, then the **Create Edge** arrow icon, and finally click on the **add_webserver** task to draw the edge.  Afterwards your **Workspace** should look like this:
-
-.. figure:: images/510scaleout3.png
-
-Scale In
-........
-
-Again imagine you're the administrator of this Task Manager Application we're building.  It's the end of your busy season, and you'd like to scale the Web Server back in to save on resource utilization.  To accomplish this, navigate to the **Application Overview > Application Profile** section, expand the **Default** Application Profile.  Then, select :fa:`plus-circle` next to the **Actions** section.  On the **Configuration Panel** to the right, rename the new Action to be **Scale In**.
-
-.. figure:: images/510scalein1.png
-
-**Below** the **WebServer** service tile, click the **+ Task** button to add a scaling task, and fill out the following fields:
-
-- **Task Name** - web_scale_in
-- **Scaling Type** - Scale In
-- **Scaling Count** - 1
-
-.. figure:: images/510scalein2.png
-
-When a user later runs the **Scale In** task, the last **WebServer** replica will have its **Package Uninstall** task run, the VM will be shut down, and then deleted, which will reclaim resources.  However, we do need to modify the **HAProxy** configuration to ensure that we're no longer sending traffic to the to-be-deleted Web Server.
-
-**Within** the **HAProxy** service tile, click the **+ Task** button, then fill out the following fields:
-
-- **Task Name** - del_webserver
-- **Type** - Execute
-- **Script Type** - Shell
-- **Credential** - CENTOS
-
-Copy and paste the following script into the **Script** field:
-
-.. code-block:: bash
-
-  #!/bin/bash
-  set -ex
-
-  host=$(echo "@@{WebServer.address}@@" | awk -F "," '{print $NF}')
-  sudo sed -i "/$host/d" /etc/haproxy/haproxy.cfg
-
-  sudo systemctl daemon-reload
-  sudo systemctl restart haproxy
-
-That script will grab the last address in the WebServer address array, and remove it from the haproxy.cfg file.  Similar to the last step, we want to be sure that this happens **before** the new WebServer is destroyed, otherwise the HAProxy server may send requests to a non-functioning WebServer.
-
-To solve this issue, on the **Workspace**, click on the **del_webserver** task, then the **Create Edge** arrow icon, and finally click on the **web_scale_in** task to draw the edge.  Afterwards your **Workspace** should look like this:
-
-.. figure:: images/510scalein3.png
-
-
-Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
-
 Launching and Managing the Application
 ......................................
 
@@ -427,15 +333,12 @@ Once the application changes into a **RUNNING** state, navigate to the **Service
 
 .. figure:: images/5103twa2.png
 
-Now, back within Calm, navigate to the **Manage** tab, and click the play button next to the **Scale Out** task, and click **Run** to Scale out the Web Server.  Monitor the Scale Out action on the **Audit** tab.
-
 Takeaways
 +++++++++
 
 - Applications typically span across multiple VMs, each responsible for different services. Calm is capable of automated and orchestrating full applications.
 - Dependencies between services can be easily modeled in the Blueprint Editor.
 - Users can quickly provision entire application stacks for production or testing for repeatable results without time lost to manual configuration.
-- Day 2 operations such as scaling can also be easily modeled, allowing administrators to manage an application for months or years.
 
 .. |proj-icon| image:: ../images/projects_icon.png
 .. |mktmgr-icon| image:: ../images/marketplacemanager_icon.png
