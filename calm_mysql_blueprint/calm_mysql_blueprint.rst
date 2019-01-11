@@ -26,9 +26,7 @@ Select **Calm** from the **Project** drop down menu.
 
 Click **Proceed** to continue.
 
-Click **Credentials >** :fa:`plus-circle` and depending on which track you're on, do *one* of the two following steps:
-
-**Cloud Track**:
+Click **Credentials >** :fa:`plus-circle` and fill in the following fields:
 
 - **Credential Name** - CENTOS
 - **Username** - centos
@@ -78,7 +76,9 @@ Click **Save** to save your Blueprint.
 Setting Variables
 .................
 
-Variables allow extensibility of Blueprints, meaning a single Blueprint can be used for multiple purposes and environments depending on the configuration of its variables. Variables can either be static values saved as part of the Blueprint or they can be specified at **Runtime** (when the Blueprint is launched). By default, variables are stored in plaintext and visible in the Configuration Pane. Setting a variable as **Secret** will mask the value and is ideal for variables such as passwords.
+Variables allow extensibility of Blueprints, meaning a single Blueprint can be used for multiple purposes and environments depending on the configuration of its variables.
+Variables can either be static values saved as part of the Blueprint or they can be specified at **Runtime** (when the Blueprint is launched). By default, variables are stored in plaintext and visible in the Configuration Pane.
+Setting a variable as **Secret** will mask the value and is ideal for variables such as passwords.
 
 Variables can be used in scripts executed against objects using the **@@{variable_name}@@** construct. Calm will expand and replace the variable with the appropriate value before sending to the VM.
 
@@ -174,7 +174,8 @@ Fill out the following fields:
 
 Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
 
-With the MySQL service icon selected in the workspace window, scroll to the top of the **Configuration Panel**, click **Package**.  Name the Package as **MYSQL_PACKAGE**, and then click the **Configure install** button.
+With the MySQL service icon selected in the workspace window, scroll to the top of the **Configuration Panel**, click **Package**.
+Name the Package as **MYSQL_PACKAGE**, and then click the **Configure install** button.
 
 On the Blueprint Canvas section, a **Package Install** field will pop up next to the MySQL Service tile:
 

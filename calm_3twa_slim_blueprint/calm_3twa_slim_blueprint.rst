@@ -1,8 +1,8 @@
 .. _calm_lamp_blueprint:
 
---------------------
-Calm: 3TWA Blueprint
---------------------
+-----------------------------
+Calm: 3-Tier WebApp Blueprint
+-----------------------------
 
 Overview
 ++++++++
@@ -327,9 +327,13 @@ Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the
 Launching and Managing the Application
 ......................................
 
-Within the blueprint editor, click **Launch**. Specify a unique **Application Name** (e.g. Calm3TWA*<INITIALS>*-2) and click **Create**.  Monitor the application as it deploys.
+Within the blueprint editor, click **Launch**. Specify a unique **Application Name** (e.g. Calm3TWA-*Initials*-2) and click **Create**.
 
-Once the application changes into a **RUNNING** state, navigate to the **Services** tab and select the **HAProxy** service.  On the panel that pops open on the right, highlight and copy the **IP Address** field.  In a new browser tab or window, navigate to http://<HAProxy-IP>, and test out your Task Manager Web Application.
+Monitor the application as it deploys. Once the application changes into a **RUNNING** state, navigate to the **Services** tab and select the **HAProxy** service.
+
+On the panel that pops open on the right, highlight and copy the **IP Address** field.
+
+In a new browser tab or window, navigate to http://<HAProxy-IP>, and test out your Task Manager Web Application.
 
 .. figure:: images/5103twa2.png
 

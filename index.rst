@@ -21,8 +21,10 @@
   calm_enable/calm_enable
   calm_projects/calm_projects
   calm_mysql_blueprint/calm_mysql_blueprint
-  calm_3twa_blueprint/calm_3twa_blueprint
+  calm_3twa_slim_blueprint/calm_3twa_slim_blueprint
+  calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
   calm_windows_blueprint/calm_windows_blueprint
+  calm_win_tiered_app/calm_win_tiered_app
   calm_marketplace/calm_marketplace
 
 .. toctree::
@@ -44,9 +46,9 @@
   :name: _optional_labs
   :hidden:
 
-  calm_enable/calm_enable
-  flow_assign_categories_in_calm/flow_assign_categories_in_calm
   calm_sshkey_creation/calm_sshkey_creation
+  flow_assign_categories_in_calm/flow_assign_categories_in_calm
+
 
 .. toctree::
   :maxdepth: 2
