@@ -404,7 +404,7 @@ Copy and paste the following script into the **Script** field:
   set -ex
 
   host=$(echo "@@{WebServer.address}@@" | awk -F "," '{print $NF}')
-  sudo sed -i '/$host/d' /etc/haproxy/haproxy.cfg
+  sudo sed -i "/$host/d" /etc/haproxy/haproxy.cfg
 
   sudo systemctl daemon-reload
   sudo systemctl restart haproxy
