@@ -335,20 +335,17 @@ In the **Application Overview > Application Profile** section, expand the **Defa
 
 .. figure:: images/510scaleout1.png
 
-Next to the **WebServer** service tile, click the **+ Task** button, then fill out the following fields:
+In the box **below** the **WebServer** service tile, click the **+ Task** button to add a scaling task, and fill out the following fields:
 
 - **Task Name** - web_scale_out
-- **Type** - Scaling
 - **Scaling Type** - Scale Out
 - **Scaling Count** - 1
 
 .. figure:: images/510scaleout2.png
 
-Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
-
 When a user later runs the **Scale Out** task, a new **WebServer** VM will get created, and the **Package Install** tasks for that service will be executed.  However, we do need to modify the **HAProxy** configuration in order to start taking advantage of this new web server.
 
-Next to the **HAProxy** service tile, click the **+ Task** button, then fill out the following fields:
+**Within** the **HAProxy** service tile, click the **+ Task** button, then fill out the following fields:
 
 - **Task Name** - add_webserver
 - **Type** - Execute
@@ -382,20 +379,17 @@ Again imagine you're the administrator of this Task Manager Application we're bu
 
 .. figure:: images/510scalein1.png
 
-Next to the **WebServer** service tile, click the **+ Task** button, then fill out the following fields:
+**Below** the **WebServer** service tile, click the **+ Task** button to add a scaling task, and fill out the following fields:
 
 - **Task Name** - web_scale_in
-- **Type** - Scaling
 - **Scaling Type** - Scale In
 - **Scaling Count** - 1
 
 .. figure:: images/510scalein2.png
 
-Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
-
 When a user later runs the **Scale In** task, the last **WebServer** replica will have its **Package Uninstall** task run, the VM will be shut down, and then deleted, which will reclaim resources.  However, we do need to modify the **HAProxy** configuration to ensure that we're no longer sending traffic to the to-be-deleted Web Server.
 
-Next to the **HAProxy** service tile, click the **+ Task** button, then fill out the following fields:
+**Within** the **HAProxy** service tile, click the **+ Task** button, then fill out the following fields:
 
 - **Task Name** - del_webserver
 - **Type** - Execute
@@ -420,6 +414,7 @@ That script will grab the last address in the WebServer address array, and remov
 To solve this issue, on the **Workspace**, click on the **del_webserver** task, then the **Create Edge** arrow icon, and finally click on the **web_scale_in** task to draw the edge.  Afterwards your **Workspace** should look like this:
 
 .. figure:: images/510scalein3.png
+
 
 Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
 
