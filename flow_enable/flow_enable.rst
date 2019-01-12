@@ -1,8 +1,8 @@
-.. _flow_enable_and_lab_setup:
+.. _flow_enable:
 
---------------------------
-Flow: Enable and Lab Setup
---------------------------
+-------------
+Flow: Enable
+-------------
 
 Overview
 ++++++++
@@ -11,87 +11,29 @@ Overview
 
   Estimated time to complete: 10-20 MINUTES
 
-In this exercise you will enable Nutanix Flow, formally known as Microsegmentation, and create the VMs to be used throughout the remaining Flow exercises, **if you have not cloned the VMs already as part of the Lab - Deploying Workloads exercise**.
+In this exercise you will enable Nutanix Flow.
 
-Enabling Microsegmentation
+Enabling Flow
 ++++++++++++++++++++++++++
 
-Open https://<Prism-Central-IP>:9440/ in the Chrome browser and log in.
+Flow is built into Prism Central and requires no additional appliances or consoles to manage. Before you can begin securing your environment with Flow, the service must be enabled.
 
 .. note::
 
-  Do not use Firefox for the Flow policy steps in the following exercises.
+  Flow can only be enabled once per Prism Central instance. If **Flow** displays a green check mark next to it, that means Flow has already been enabled for the Prism Central instance being used. Proceed to :ref:`flow_secure_app`.
 
-From the navigation bar, click the question mark at the top right corner and expand the **New in Prism Central** section of the menu.
+In **Prism Central**, click the **?** drop down menu and select **Flow**.
 
-Click **Microsegmentation**.
+.. figure:: images/10.png
 
-Select the **Enable Microsegmentation** check box within the **Enable Microsegmentation** dialog box.
+Note that enabling Flow will require an additional 1GB of memory for each Prism Central VM, but there is no action required by the user as this occurs automatically.
 
-.. figure:: images/enable_flow.png
+Select **Enable Flow** and click **Enable**.
 
-.. note::
-
-  Flow can only be enabled once per Prism Central instance. If **Microsegmentation** displays a green check mark next to it, that means Microsegmentation has already been enabled for the Prism Central instance being used.
-
-Click **Enable**
-
-.. figure:: images/enable.png
-
-Create Five VMs
-+++++++++++++++
-
-.. note::
-
-  Please use the VM you created in the "Deploy VM Lab", and make 4 clones. Otherwise follow the instructions to create a VM and clone it.
-
-Now you will create the **five** virtual machines you will use to test the capabilities of Nutanix Flow. Create these virtual machines from the base VM in Prism Central called CentOS.
-
-In **Prism Central > Explore > VMs**, click **Create VM**.
-
-Fill out the following fields and click **Save**:
-
-- **Name** - flow-<your_initials>-1
-- **Description** - Flow testing VM
-- **vCPU(s)** - 2
-- **Number of Cores per vCPU** - 1
-- **Memory** - 4 GiB
-- Select **+ Add New Disk**
-
-  - **Operation** - Clone from Image Service
-  - **Image** - CentOS
-  - Select **Add**
-- Remove **CD-ROM** Disk
-- Select **Add New NIC**
-
-  - **VLAN Name** - Primary
-  - **IP Address** - *10.21.XX.42*
-  - Select **Add**
-
-Clone the other four VMs:
--------------------------
-
-Take that VM and clone it four times to have a total of five VMs named as follows:
-
-flow-<your_initials>-1
-flow-<your_initials>-2
-flow-<your_initials>-3
-flow-<your_initials>-4
-flow-<your_initials>-5
-
-Select the **flow-<your_initials>-1** VM and click **Actions > Clone**.
-
-- **Number of Clones** - 4
-- **Prefix Name** - flow-<your_initials>-
-- **Starting Index Number** - 2
-
-Select the five newly created Flow VMs and click **Actions > Power on**.
-
-.. figure:: images/flow_vms_2.png
+.. figure:: images/11.png
 
 Takeaways
 +++++++++
 
-- Microsegmentation is a decentralized security framework included from within Prism Central.
-- It offers additional protection against malicious threats that originate from within the data center and spread laterally, from one machine to another.
-- Once Microsegmentation is enabled in the cluster, VMs can be easily protected through Security Policies as created in the Prism Central UI. These function as labels that can easily be applied to VMs without any additional network setup.
+- Microsegmentation, part of Flow, is a decentralized security framework managed from Prism Central.
+- Once Flow is enabled in the cluster, VMs can be easily protected through Security Policies created in the Prism Central UI. These function as labels that can easily be applied to VMs without any additional network setup.

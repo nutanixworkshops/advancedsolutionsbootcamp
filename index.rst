@@ -6,35 +6,39 @@
   :name: _prism_central
   :hidden:
 
-  monitoring_and_managing_env/monitoring_and_managing_env
-  lab_monitoring_env/lab_monitoring_env
+  what_is_prism_central/what_is_prism_central
+  prism_central_overview/prism_central_overview
+  prism_central_dashboards_reports/prism_central_dashboards_reports
+  prism_central_resource_planning/prism_central_resource_planning
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Calm Lab
-  :name: _optional_calm_lab
+  :caption: Calm Lab
+  :name: _calm_lab
   :hidden:
 
   what_is_calm/what_is_calm
+  calm_enable/calm_enable
   calm_projects/calm_projects
-  calm_sshkey_creation/calm_sshkey_creation
   calm_mysql_blueprint/calm_mysql_blueprint
-  calm_3twa_blueprint/calm_3twa_blueprint
+  calm_3twa_slim_blueprint/calm_3twa_slim_blueprint
+  calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
   calm_windows_blueprint/calm_windows_blueprint
+  calm_win_tiered_app/calm_win_tiered_app
   calm_marketplace/calm_marketplace
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Flow Lab
-  :name: _optional_flow_lab
+  :caption: Flow Lab
+  :name: _flow_lab
   :hidden:
 
   what_is_flow/what_is_flow
+  flow_lab_staging/flow_lab_staging
   flow_enable/flow_enable
-  flow_quarantine_vm/flow_quarantine_vm
-  flow_isolate_environments/flow_isolate_environments
   flow_secure_app/flow_secure_app
-  flow_visualization/flow_visualization
+  flow_isolate_environments/flow_isolate_environments
+  flow_quarantine_vm/flow_quarantine_vm
 
 .. toctree::
   :maxdepth: 2
@@ -42,8 +46,9 @@
   :name: _optional_labs
   :hidden:
 
-  authentication/authentication
-  calm_enable/calm_enable
+  calm_sshkey_creation/calm_sshkey_creation
+  flow_assign_categories_in_calm/flow_assign_categories_in_calm
+
 
 .. toctree::
   :maxdepth: 2

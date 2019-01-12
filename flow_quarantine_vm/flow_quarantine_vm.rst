@@ -9,60 +9,67 @@ Overview
 
 .. note::
 
-  Estimated time to complete: 15-30 MINUTES
+  Estimated time to complete: 5-10 MINUTES
 
 In this task we will place a VM into quarantine and observe the behavior of the VM. We will also inspect the configurable options inside the quarantine policy.
 
 Quarantine a VM and Explore the Quarantine Policy
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-Confirm Communication between flow-abc-1 and flow-abc-2
-.......................................................
+In this task we will place a VM into quarantine and observe the behavior of the VM. We will also inspect the configurable options inside the quarantine policy.
 
-Log on to the Prism Central environment and navigate to **Explore > VMs**.
+Return to the *Initials*\ **-WinClient-0** console.
 
-Open the VM console of **flow-abc-1** and **flow-abc-2** by selecting one VM at a time and clicking on the checkbox next to it.
+Open a **Command Prompt** and run ``ping -t HAPROXY-VM-IP`` to verify connectivity between the client and load balancer.
 
-Click **Actions > Launch Console**.
+.. note::
 
-.. figure:: images/quarantine_pings.png
+  If the ping is unsuccessful you may need to update your Inbound Rule for **Environment:Dev** to **AppTier:TMLB-**\ *Initials* to include **Any** as the **Type** and **Code** for **ICMP** traffic as shown below. Apply the updated **AppTaskMan-**\ *Initials* policy and the ping should resume.
 
-Log into both VMs with the following user credentials:
+  .. figure:: images/41.png
 
-- **Username** - root
-- **Password** - nutanix/4u
+In **Prism Central > Virtual Infrastructure > VMs**, select your *Initials*\ **-HAPROXY-0...** VM.
 
-Find the IPs of the VMs via the command *ifconfig*, and start a continuous ping from the **flow-abc-1** VM to the **flow-abc-2** VM.
+Click **Actions > Quarantine VMs**
 
-Quarantine a VM and Edit The Quarantine Policy
-..............................................
+.. figure:: images/42.png
 
-Quarantine the **flow-abc-2** VM by navigating to **Explore > VMs**.
+Select **Forensic** and click **Quarantine**.
 
-Select **flow-abc-2 > Actions > Quarantine VMs**. Select **Forensic** and click **Quarantine**.
+What happens with the continuous ping between your client and the load balancer? Can you access the Task Manager application web page from the client VM?
 
-.. figure:: images/select_forensic.png
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > Quarantine** to view all Quarantined VMs.
 
-What happens with the continuous ping between VMs 1 and 2?
+Click **Update** to edit the Quarantine policy.
 
-Navigate to **Explore > Security Policies > Quarantine**.
+To illustrate the capabilities of this special Flow policy, you will add your client VM as a "forensic tool." In other environments, VMs allowed inbound access to quarantined VMs could be used to host forensic tools such as... <?>
 
-Select **Update** in the top right corner then select **+ Add Source** to the Quarantine policy.
+Under **Inbound**, click **+ Add Source**.
 
-Add a source by **Subnet/IP** with the IP address of **flow-abc-1**, a netmask of **/32**. Click on the plus sign ( + ) near **Forensic** category and allow any protocol on any port to the Forensic quarantine category.
+Fill out the following fields:
 
-What targets can this source be connected to?
+- **Add source by:** - Select **Subnet/IP**
+- Specify *Your WinClient VM IP*\ /32
 
-What is the difference between the Forensic and Strict quarantine mode?
+To what targets can this source be connected? What is the difference between the Forensic and Strict quarantine mode?
 
-Select **Next > Apply Now** to save the policy.
+Note that adding a VM to the **Strict** Quarantine policy disables all inbound and outbound communication to a VM. The **Strict** policy would apply to an VMs whose presence on the network poses a threat to the environment.
 
-What happens to the pings between **flow-abc-1** and **flow-abc-2** after the source is added?
+Click the :fa:`plus-circle` icon to the right of **Quarantine: Forensic** to create an Inbound Rule.
 
-Unquarantine **flow-abc-2** by navigating to **Explore > VMs > flow-abc-2 > Actions > Unquarantine VM**.
+Click **Save** to allow any protocol on any port between the client VM and the **Quarantine: Forensic** category.
+
+.. figure:: images/43.png
+
+Click **Next > Apply Now** to save and apply the updated policy.
+
+What happens to the pings to the load balancer after the source is added? Can you access the Task Manager web application?
+
+You can remove the load balancer VM from the **Quarantine: Forensic** category by selecting the VM in Prism Central and clicking **Actions > Unquarantine VMs**.
 
 Takeaways
 +++++++++
 
-- In this exercise you utilized Flow to quarantine a VM in the environment using the two modalities of the quarantine policy, which are strict and forensic.
-- The forensic modality is key in allowing you to study the connection patterns into and out of a VM in order to establish which connections are allowed or denied while the VM is quarantined.
+- In this exercise you utilized Flow to quarantine a VM using the two modalities of the quarantine policy, which are strict and forensic.
+- Quarantine policies are evaluated at a higher priority than application policies. A quarantine traffic can block traffic that would otherwise be allowed by an application policy.
+- The forensic modality is key to allow limited access a quarantined VM while the VM is quarantined.
