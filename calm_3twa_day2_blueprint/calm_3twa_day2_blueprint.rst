@@ -1,8 +1,8 @@
 .. _calm_3twa_day2_blueprint:
 
----------------------------
-Calm: 3TWA Day 2 Operations
----------------------------
+--------------------------------------
+Calm: 3-Tier WebApp - Day 2 Operations
+--------------------------------------
 
 Overview
 ++++++++
@@ -132,7 +132,7 @@ The first thing we're going to need to do is to stop the respective processes on
 
    #!/bin/bash
    set -ex
-   
+
    sudo systemctl stop mysqld
 
 **StopWebServer Script:**
@@ -141,7 +141,7 @@ The first thing we're going to need to do is to stop the respective processes on
 
    #!/bin/bash
    set -ex
-   
+
    sudo systemctl stop php-fpm
    sudo systemctl stop nginx
 
@@ -151,7 +151,7 @@ The first thing we're going to need to do is to stop the respective processes on
 
    #!/bin/bash
    set -ex
-   
+
    sudo systemctl stop haproxy
 
 Once complete, our blueprint canvas should look like this:
@@ -184,7 +184,7 @@ Now that our critical services are stopped, we'll want to perform our updates.  
 
    #!/bin/bash
    set -ex
-   
+
    sudo yum update -y
 
 Afterwards, your blueprint canvas should look like this:
@@ -217,7 +217,7 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 
    #!/bin/bash
    set -ex
-   
+
    sudo systemctl start mysqld
 
 **StartWebServer Script:**
@@ -226,7 +226,7 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 
    #!/bin/bash
    set -ex
-   
+
    sudo systemctl start php-fpm
    sudo systemctl start nginx
 
@@ -236,7 +236,7 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 
    #!/bin/bash
    set -ex
-   
+
    sudo systemctl start haproxy
 
 Once complete, our blueprint canvas should look like this:
@@ -262,10 +262,3 @@ Takeaways
 * Not only can Calm orchestrate complex application deployments, it can manage applications throughout their entire lifecycle, by modeling complex Day 2 operations.
 * Whether it's a built in task, like scaling, or a custom task, like upgrades, Calm can be directed to perform the operations in specific order, or if order doesn't matter, perform them in parallel to save on time.
 * What operation are you currently doing on a regular basis?  It's likely that it can be modeled in Calm, saving you countless hours.  Take back your weekend!
-
-
-
-
-
-
-

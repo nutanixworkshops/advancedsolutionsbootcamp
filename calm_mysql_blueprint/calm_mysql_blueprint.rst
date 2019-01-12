@@ -26,7 +26,7 @@ Select **Calm** from the **Project** drop down menu.
 
 Click **Proceed** to continue.
 
-Click **Credentials >** :fa:`plus-circle` and fill in the following fields:
+Click **Credentials >** :fa:`plus-circle` and fill out the following fields:
 
 - **Credential Name** - CENTOS
 - **Username** - centos
